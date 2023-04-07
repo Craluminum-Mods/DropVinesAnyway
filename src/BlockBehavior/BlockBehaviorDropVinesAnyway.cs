@@ -1,0 +1,35 @@
+using Vintagestory.API.Common;
+using Vintagestory.API.MathTools;
+
+namespace DropVinesAnyway
+{
+    class BlockBehaviorDropVinesAnyway : BlockBehavior
+    {
+        bool brokenByPlayer;
+
+        public BlockBehaviorDropVinesAnyway(Block block) : base(block) { }
+
+        public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, ref EnumHandling handling)
+        {
+            handling = EnumHandling.PreventDefault;
+
+            brokenByPlayer = byPlayer != null;
+
+            base.OnBlockBroken(world, pos, byPlayer, ref handling);
+        }
+
+        public override void OnBlockRemoved(IWorldAccessor world, BlockPos pos, ref EnumHandling handling)
+        {
+            handling = EnumHandling.PreventDefault;
+
+            if (!brokenByPlayer)
+            {
+                block.OnBlockBroken(world, pos, null);
+            }
+
+            brokenByPlayer = false;
+
+            base.OnBlockRemoved(world, pos, ref handling);
+        }
+    }
+}

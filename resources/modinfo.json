@@ -1,0 +1,9 @@
+{
+    "type": "code",
+    "side": "server",
+    "modid": "dropvinesanyway",
+    "name": "Drop Vines Anyway",
+    "description": "Drops vines while chopping trees or breaking the block they were placed on",
+    "authors": ["Craluminum2413"],
+    "version": "1.0.0"
+}
