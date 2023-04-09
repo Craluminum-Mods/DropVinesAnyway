@@ -9,6 +9,12 @@ namespace DropVinesAnyway
 
         public BlockBehaviorDropVinesAnyway(Block block) : base(block) { }
 
+        public override bool IsReplacableBy(Block block, ref EnumHandling handling)
+        {
+            handling = EnumHandling.PreventDefault;
+            return false;
+        }
+
         public override void OnBlockBroken(IWorldAccessor world, BlockPos pos, IPlayer byPlayer, ref EnumHandling handling)
         {
             handling = EnumHandling.PreventDefault;
