@@ -1,5 +1,4 @@
 using Vintagestory.API.Common;
-using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
@@ -12,9 +11,10 @@ class Core : ModSystem
 {
     public override bool ShouldLoad(EnumAppSide forSide) => forSide == EnumAppSide.Server;
 
-    public override void StartServerSide(ICoreServerAPI api)
+    public override void Start(ICoreAPI api)
     {
-        base.StartServerSide(api);
+        base.Start(api);
+        if (api.Side != EnumAppSide.Server) return;
         api.RegisterBlockBehaviorClass("DropVinesAnyway", typeof(BlockBehaviorDropVinesAnyway));
         api.World.Logger.Event("started 'Drop Vines Anyway' mod");
     }
